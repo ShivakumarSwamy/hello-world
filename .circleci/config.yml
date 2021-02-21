@@ -64,7 +64,7 @@ jobs:
     steps:
       - run: cat output.txt
       - run:
-          command: echo "Hello Error"
+          command: echo "Hello Error!"
           when: on_fail
 
 workflows:
