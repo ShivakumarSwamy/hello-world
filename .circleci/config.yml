@@ -42,7 +42,10 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workdir
-      - run: pwd && cat output.txt
+      - run:
+          command: |
+            cd /tmp/workdir
+            cat output.txt
 
 workflows:
   welcome:
