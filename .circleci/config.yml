@@ -26,9 +26,12 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - run: echo "Hello World" > output.txt
+      - run:
+          command: |
+            mkdir -p /tmp/workdir
+            echo "Hello World" > output.txt
       - persist_to_workspace:
-          root: /workdir
+          root: /tmp/workdir
           paths:
             - output.txt
 
@@ -37,7 +40,7 @@ jobs:
       - image: alpine:latest
     steps:
       - attach_workspace:
-          at: /workdir
+          at: /tmp/workdir
       - run: pwd && cat output.txt
 
 workflows:
