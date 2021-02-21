@@ -22,7 +22,28 @@ jobs:
           command: |
             echo $NAME
 
+  save_hello_world_output:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "Hello World" > output.txt
+      - persist_to_workspace:
+          root: /tmp/workdir
+          paths:
+            - output.txt
+
+  print_output_file:
+    docker:
+      - image: alpine:latest
+    steps:
+      - attach_workspace:
+          at: /tmp/workdir
+      - run: pwd && cat output.txt
+
 workflows:
   welcome:
     jobs:
-      - print_environment_variable
+      - save_hello_world_output
+      - print_output_file:
+          requires:
+            - save_hello_world_output
