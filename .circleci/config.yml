@@ -58,7 +58,16 @@ jobs:
     steps:
       - print_pipeline_id
 
+  intentionally_fail:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo output.txt
+      - run:
+          command: echo "Hello Error"
+          when: on_fail
+
 workflows:
   welcome:
     jobs:
-      - print_pipeline_id
+      - intentionally_fail
