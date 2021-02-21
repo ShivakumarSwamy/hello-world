@@ -30,6 +30,7 @@ jobs:
           command: |
             mkdir -p /tmp/workdir
             echo "Hello World" > output.txt
+            pwd && ls
       - persist_to_workspace:
           root: /tmp/workdir
           paths:
