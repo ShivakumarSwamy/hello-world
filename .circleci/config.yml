@@ -28,9 +28,9 @@ jobs:
     steps:
       - run:
           command: |
-            mkdir -p /tmp/workdir && cd $_
-            pwd && echo "Hello World" > output.txt
-            pwd && ls
+            mkdir -p /tmp/workdir
+            cd /tmp/workdir
+            echo "Hello World" > output.txt
       - persist_to_workspace:
           root: /tmp/workdir
           paths:
